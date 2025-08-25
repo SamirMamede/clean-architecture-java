@@ -9,9 +9,10 @@ public record Event(
         String nome,
         String descricao,
         String identificador,
-        LocalDateTime dataInicio,
-        LocalDateTime dataFim,
-        String local,
+        LocalDateTime data_inicio,
+        LocalDateTime data_fim,
+        String local_evento,
+        Integer capacidade,
         String organizador,
         EventType tipo
 ) {
@@ -25,13 +26,16 @@ public record Event(
         if (descricao == null || descricao.isBlank()) {
             throw new IllegalArgumentException("Descrição não pode ser nulo, ou vazio.");
         }
-        if (local == null || local.isBlank()) {
+        if (local_evento == null || local_evento.isBlank()) {
             throw new IllegalArgumentException("Local não pode ser nulo, ou vazio.");
+        }
+        if (capacidade < 0){
+            throw new IllegalArgumentException("Capacidade não podeser igual a 0.");
         }
         if (organizador == null || organizador.isBlank()) {
             throw new IllegalArgumentException("Organizador não pode ser nulo, ou vazio.");
         }
-        if (dataInicio == null || dataFim == null || dataInicio.isAfter(dataFim)){
+        if (data_inicio == null || data_fim == null || data_inicio.isAfter(data_fim)){
             throw new IllegalArgumentException("Datas inválidas: início deve ser antes do fim.");
         }
     }
